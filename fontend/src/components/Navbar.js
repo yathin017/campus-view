@@ -3,7 +3,7 @@ import logo from "../assets/logo.png"
 
 const Navbar = () => {
   return (
-    <header className="text-gray-400 bg-[#E4F4FA] body-font">
+    <header className="text-gray-400 bg-[#E4F4FA] body-font w-full z-10 absolute">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
           <img src={logo} className="h-20"></img>

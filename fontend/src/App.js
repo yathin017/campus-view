@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="select-none">
       {/* <Navbar /> */}
-      {/* <Home /> */}
+      <Home />
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <Pricing /> */}
