@@ -1,34 +1,30 @@
 import React from 'react'
 import videoBg from '../assets/home-bg.mp4'
-import Navbar from './Navbar'
 import logo from "../assets/logo3.png"
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
     <>
       <div className=' z-10 overflow-y-hidden text-white absolute w-full'>
         <div className='flex flex-col justify-center items-center'>
-          {/* <Navbar /> */}
           <div className='flex flex-row justify-between items-center w-full p-4'>
             <div>
               <img src={logo} className='w-40' alt="" />
             </div>
             <div className='flex flex-row justify-start items-center space-x-10 text-xl'>
-              {/* <div className='cursor-pointer'>
-                Home
-              </div> */}
-              <div className='cursor-pointer'>
+              <Link to='/about' className='cursor-pointer'>
                 About us
-              </div>
-              <div className='cursor-pointer'>
+              </Link>
+              <Link to='pricing' className='cursor-pointer'>
                 Pricing
-              </div>
-              <div className='cursor-pointer'>
+              </Link>
+              <Link to='contact' className='cursor-pointer'>
                 Contact us
-              </div>
-              <div className='cursor-pointer bg-[#1B5A7A] p-2 rounded-md hover:text-[#1B5A7A] hover:bg-white hover:shadow-md hover:shadow-white transition-all duration-500'>
+              </Link>
+              <Link to='/login' className='cursor-pointer bg-[#1B5A7A] p-2 rounded-md hover:text-[#1B5A7A] hover:bg-white hover:shadow-md hover:shadow-white transition-all duration-500'>
                 Get Started
-              </div>
+              </Link>
             </div>
           </div>
         </div>

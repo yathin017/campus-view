@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../assets/logo.png'
 import { FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope, FaLock } from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -41,9 +42,11 @@ const Login = () => {
                     </div>
                 </div>
                 <div className='w-2/5 bg-[#E1F3F9] text-white rounded-tr-2xl rounded-br-2xl py-24 px-12'>
-                    <img className='mb-2 pb-5' src={logo}/>
+                    <Link to='/'>
+                    <img className='mb-2 pb-5' src={logo} alt="Logo"/>
+                    </Link>
                     <p className='mb-2 text-[#1B5A7A]'>Start your journey with us</p>
-                    <a href='#' className='border-2 border-[#1B5A7A] text-[#1B5A7A] rounded-full px-12 py-2 inline-block font-semibold hover:bg-[#1B5A7A] hover:text-[#E1F3F9]'>Sign up</a>
+                    <Link to='/register' className='border-2 border-[#1B5A7A] text-[#1B5A7A] rounded-full px-12 py-2 inline-block font-semibold hover:bg-[#1B5A7A] hover:text-[#E1F3F9]'>Sign up</Link>
                 </div>
             </div>
         </div>
