@@ -35,9 +35,9 @@ const Home = () => {
           <div className='text-2xl'>
             Explore your dream institute right from comfort of your home
           </div>
-          <div className='text-xl border-2 border-white px-1 py-2 cursor-pointer schedulebutton hover:text-black'>
+          <Link to="/register" className='text-xl border-2 border-white px-1 py-2 cursor-pointer schedulebutton hover:text-black'>
             Explore now
-          </div>
+          </Link>
         </div>
       </div>
       <div className='z-0 absolute h-screen w-full bg-[#0000008f] top-0'></div>
