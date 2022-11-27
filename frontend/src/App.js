@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Pricing from "./components/Pricing";
 import Register from "./components/Register";
+import Upload from "./components/Upload";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/register" element={<><Register /></>} />
           <Route path="/pricing" element={<><Navbar /><Pricing /></>} />
           <Route path="/contact" element={<><Navbar /><Contact /></>} />
+          <Route path="/upload" element={<><Navbar /><Upload /></>} />
         </Routes>
       </Router>
     </div>
