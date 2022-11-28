@@ -2,7 +2,8 @@ import React from "react";
 
 const Pricing = () => {
   return (
-      <div className="bg-[#E4F4FA] container h-screen px-5 py-32 mx-auto">
+    <div className="bg-[#E4F4FA] py-60">
+      <div className=" container h-screen px-5  mx-auto">
         <div className="flex flex-wrap -m-4 justify-center">
           <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
             <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
@@ -251,6 +252,7 @@ const Pricing = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
   );
 };

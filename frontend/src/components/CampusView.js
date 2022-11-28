@@ -29,24 +29,13 @@ const CampusView = () => {
             >
               <option>IIT Bombay</option>
               <option>IIT Madras</option>
-              <option>IIT Kharagpur</option>
+              <option>IIIT Naya Raipur</option>
             </select>
           </div>
         </div>
-        <p className="text-2xl font-semibold pt-10">Place1</p>
-        <Carousel breakPoints={breakPoints} className="pt-5">
-          <Item>One</Item>
-          <Item>Two</Item>
-          <Item>Three</Item>
-          <Item>Four</Item>
-          <Item>Five</Item>
-          <Item>Six</Item>
-          <Item>Seven</Item>
-          <Item>Eight</Item>
-        </Carousel>
+        <p className="text-2xl font-semibold pt-10"></p>
 
-        <p className="text-2xl font-semibold pt-10">Place2</p>
-        <Carousel breakPoints={breakPoints} className="pt-5">
+        {/* <Carousel breakPoints={breakPoints} className="pt-5">
           <Item>One</Item>
           <Item>Two</Item>
           <Item>Three</Item>
@@ -55,7 +44,7 @@ const CampusView = () => {
           <Item>Six</Item>
           <Item>Seven</Item>
           <Item>Eight</Item>
-        </Carousel>
+        </Carousel> */}
       </div>
     </div>
   );

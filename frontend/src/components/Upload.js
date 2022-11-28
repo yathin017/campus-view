@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Upload = () => {
+
+  const [Firstname, setFirstName] = useState("");
+  const [lastname, setlastName] = useState("");
+  const [nameofclg, setNameofclg] = useState("");
+  const [description, setDescription] = useState("");
+  const [upiid, setUpiid] = useState("");
+  const [place, setPlace] = useState("");
+  const [image, setImage] = useState("");
+  const [email,setEmail] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("name", nameofclg);
+    formData.append("nameofuser", Firstname+" "+lastname);
+    formData.append("upiid", upiid);
+    formData.append("place", place);
+    formData.append("video", image, image.name);
+    formData.append("description", description);
+    formData.append("email", email);
+    console.log(formData);
+    window.alert("Video being uploaded...")
+    const response = await fetch('http://127.0.0.1:8000/api/uploadvideo', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Token ${localStorage.getItem("token")}`,
+      },
+      body: formData
+    });
+    if (response) {
+      window.alert('Video Upload Successfully!')
+    }
+  }
+  const onFileChange = event => {
+    setImage(event.target.files[0])
+    console.log(event.target.files[0])
+  };
   return (
     <div className="bg-[#E4F4FA]">
       <div className="pt-36 pb-6 mx-36 md:grid md:grid-cols-3 md:gap-6">
@@ -8,7 +44,7 @@ const Upload = () => {
           <form action="#" method="POST">
             <div className="shadow sm:overflow-hidden sm:rounded-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                <div>
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700">
                     User Photo
                   </label>
@@ -35,7 +71,7 @@ const Upload = () => {
                       />
                     </label>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
@@ -50,7 +86,9 @@ const Upload = () => {
                       name="first-name"
                       id="first-name"
                       autoComplete="given-name"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      value = {Firstname}
+                      onChange = {(e) => setFirstName(e.target.value)}
+                      className="mt-1 block w-full rounded-md p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
@@ -58,6 +96,7 @@ const Upload = () => {
                     <label
                       htmlFor="last-name"
                       className="block text-sm font-medium text-gray-700"
+                      
                     >
                       Last name
                     </label>
@@ -66,7 +105,9 @@ const Upload = () => {
                       name="last-name"
                       id="last-name"
                       autoComplete="family-name"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      value = {lastname}
+                      onChange = {(e) => setlastName(e.target.value)}
+                      className="mt-1 block w-full rounded-md p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
@@ -82,7 +123,9 @@ const Upload = () => {
                       name="email-address"
                       id="email-address"
                       autoComplete="email"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      value = {email}
+                      onChange = {(e) => setEmail(e.target.value)}
+                      className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
@@ -98,7 +141,9 @@ const Upload = () => {
                       name="email-address"
                       id="email-address"
                       autoComplete="email"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      value = {upiid}
+                      onChange = {(e) => setUpiid(e.target.value)}
+                      className="mt-1 block w-full rounded-md p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -134,6 +179,7 @@ const Upload = () => {
                             name="file-upload"
                             type="file"
                             className="sr-only"
+                            onChange={onFileChange}
                           />
                         </label>
                         <p className="pl-1">or drag and drop</p>
@@ -154,11 +200,13 @@ const Upload = () => {
                       id="country"
                       name="country"
                       autoComplete="country-name"
+                      value = {nameofclg}
+                      onChange = {(e) => setNameofclg(e.target.value)}
                       className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     >
                       <option>IIT Bombay</option>
                       <option>IIT Madras</option>
-                      <option>IIT Kharagpur</option>
+                      <option>IIIT Naya Raipur</option>
                     </select>
                   </div>
 
@@ -173,7 +221,9 @@ const Upload = () => {
                       type="text"
                       name="place"
                       id="place"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      value = {place}
+                      onChange = {(e) => setPlace(e.target.value)}
+                      className="mt-1 block w-full rounded-md p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -190,9 +240,10 @@ const Upload = () => {
                       id="about"
                       name="about"
                       rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       placeholder="Brief description about the video"
-                      defaultValue={""}
+                      value = {description}
+                      onChange = {(e) => setDescription(e.target.value)}
                     />
                   </div>
                 </div>
@@ -200,6 +251,7 @@ const Upload = () => {
               <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                 <button
                   type="submit"
+                  onClick={handleSubmit}
                   className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Upload
