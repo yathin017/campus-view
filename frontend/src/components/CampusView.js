@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
 
@@ -10,6 +10,27 @@ const breakPoints = [
 ];
 
 const CampusView = () => {
+  const [college,setCollege] = React.useState('IIT Bombay');
+  const [institute_data,setinstitute_data] = React.useState([]);
+  useEffect(() => {
+    const getCollege = async () => {
+      const response = await fetch('http://127.0.0.1:8000/api/getinstitute',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          'name': college
+        })
+      })
+      const data = await response.json()
+      setinstitute_data(data.data)
+      }
+      getCollege()
+    
+  }, [college])
+  
   return (
     <div className="bg-[#E4F4FA]">
       <div className="mx-10">
@@ -25,6 +46,8 @@ const CampusView = () => {
               id="college"
               name="college"
               autoComplete="college-name"
+              value={college}
+              onChange={(e)=>{setCollege(e.target.value)}}
               className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             >
               <option>IIT Bombay</option>
@@ -33,9 +56,17 @@ const CampusView = () => {
             </select>
           </div>
         </div>
-        <p className="text-2xl font-semibold pt-10"></p>
+        <p className="text-4xl font-semibold pt-10">{institute_data.name}</p>
+        <p className="text-2xl font-semibold pt-2">{institute_data.city}, {institute_data.state}</p>
+        <p className="text-xl pt-2">{institute_data.description}</p>
+        <p className="text-2xl pt-2 font-semibold">Contact Info</p>
+        <p className="text-xl pt-2">Website:- <a href={institute_data.website} target='_blank'>{institute_data.website}</a></p>
+        <p className="text-xl pt-2">Email:- {institute_data.email}</p>
+        <p className="text-xl pt-2">Phone:- {institute_data.phone}</p>
+        
 
-        {/* <Carousel breakPoints={breakPoints} className="pt-5">
+        <p className="text-2xl pt-10 font-semibold">Gallery</p>
+        <Carousel breakPoints={breakPoints} className="pt-5">
           <Item>One</Item>
           <Item>Two</Item>
           <Item>Three</Item>
@@ -44,7 +75,7 @@ const CampusView = () => {
           <Item>Six</Item>
           <Item>Seven</Item>
           <Item>Eight</Item>
-        </Carousel> */}
+        </Carousel>
       </div>
     </div>
   );
