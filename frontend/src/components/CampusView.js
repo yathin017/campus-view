@@ -10,11 +10,12 @@ const breakPoints = [
 ];
 
 const CampusView = () => {
-  const [college,setCollege] = React.useState('IIT Bombay');
-  const [institute_data,setinstitute_data] = React.useState([]);
+  const college = localStorage.getItem("college") || "IIIT Naya Raipur";
+  const [institute_data, setinstitute_data] = React.useState([]);
+  const [videos,setvideos] = React.useState([]);
   useEffect(() => {
     const getCollege = async () => {
-      const response = await fetch('http://127.0.0.1:8000/api/getinstitute',{
+      const response = await fetch('http://127.0.0.1:8000/api/getinstitute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,11 +27,12 @@ const CampusView = () => {
       })
       const data = await response.json()
       setinstitute_data(data.data)
-      }
-      getCollege()
-    
+      setvideos(data.data.videos)
+    }
+    getCollege()
+
   }, [college])
-  
+  console.log(videos)
   return (
     <div className="bg-[#E4F4FA]">
       <div className="mx-10">
@@ -47,7 +49,7 @@ const CampusView = () => {
               name="college"
               autoComplete="college-name"
               value={college}
-              onChange={(e)=>{setCollege(e.target.value)}}
+              onChange={(e) => { localStorage.setItem("college",e.target.value);window.location.reload(); }}
               className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             >
               <option>IIT Bombay</option>
@@ -63,18 +65,20 @@ const CampusView = () => {
         <p className="text-xl pt-2">Website:- <a href={institute_data.website} target='_blank'>{institute_data.website}</a></p>
         <p className="text-xl pt-2">Email:- {institute_data.email}</p>
         <p className="text-xl pt-2">Phone:- {institute_data.phone}</p>
-        
+
 
         <p className="text-2xl pt-10 font-semibold">Gallery</p>
         <Carousel breakPoints={breakPoints} className="pt-5">
-          <Item>One</Item>
-          <Item>Two</Item>
-          <Item>Three</Item>
-          <Item>Four</Item>
-          <Item>Five</Item>
-          <Item>Six</Item>
-          <Item>Seven</Item>
-          <Item>Eight</Item>
+          {
+            videos!==[] && videos.map((video_data) => {
+              return (<video
+              className="h-[240px] w- px-2 mt-5"
+              controls
+            >
+              <source src={'http://127.0.0.1:8000'+video_data[1]} type="video/mp4" />
+            </video>)
+            })
+          }
         </Carousel>
       </div>
     </div>
